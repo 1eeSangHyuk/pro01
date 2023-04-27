@@ -3,7 +3,11 @@
 <%@ page import="java.sql.*" %>
 <%
 	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
+	String pw = request.getParameter("pw1");
+	String name = request.getParameter("name");
+	String phone = request.getParameter("phone");
+	String email = request.getParameter("email");
+	String addr = request.getParameter("addr");
 
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
@@ -12,7 +16,6 @@
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-	ResultSet rs = null;
 	
 	String sql = "";
 	
@@ -20,22 +23,22 @@
 		Class.forName(driver);
 		try{
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member_tbl where mem_id=? and mem_pw=?";
+			sql = "insert into member_tbl values(?, ?, ?, ?, ?, ?, default)";
 			try{
 				pstmt = conn.prepareStatement(sql);
  				pstmt.setString(1, id);
 				pstmt.setString(2, pw);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					session.setAttribute("uid", id);
-					session.setAttribute("upw", pw);
-					response.sendRedirect("index.jsp");
-				} else {
-					session.invalidate();
+				pstmt.setString(3, name);
+				pstmt.setString(4, phone);
+				pstmt.setString(5, email);
+				pstmt.setString(6, addr);
+				int i = pstmt.executeUpdate();
+				if (i>0){
 					response.sendRedirect("login.jsp");
+				} else{
+					response.sendRedirect("submit.jsp");
 				}
 				
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch(Exception e){

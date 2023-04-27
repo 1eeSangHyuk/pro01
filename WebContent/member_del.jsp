@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
+	String mem_id = (String) session.getAttribute("uid");
 
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
@@ -12,7 +11,6 @@
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-	ResultSet rs = null;
 	
 	String sql = "";
 	
@@ -20,22 +18,19 @@
 		Class.forName(driver);
 		try{
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member_tbl where mem_id=? and mem_pw=?";
+			sql = "delete from member_tbl  where mem_id=?";
 			try{
 				pstmt = conn.prepareStatement(sql);
- 				pstmt.setString(1, id);
-				pstmt.setString(2, pw);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					session.setAttribute("uid", id);
-					session.setAttribute("upw", pw);
+				pstmt.setString(1, mem_id);
+				int i = pstmt.executeUpdate();
+				
+				if (i >0){
+					session.invalidate();
 					response.sendRedirect("index.jsp");
 				} else {
 					session.invalidate();
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("index.jsp");
 				}
-				
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch(Exception e){

@@ -35,7 +35,7 @@
 			sql = "select * from member_tbl where mem_id=?";
 			try{
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "id");
+				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
 
 				if(rs.next()){
@@ -52,18 +52,18 @@
 <%
 				}
 %>
-	<input type="button" value="닫기" onclick="close()">
-<script>
-function close(){
-	opener.document.gerElementById("id").value = document.getElementById("id").value;
-	opener.document.getElementById("idCk").value = document.getElementById("idCk").value;
-	opener.document.getElementById("msg").value = document.getElementById("msg").value;
-	if (document.getElementById("idck").value == "yes"){
-		opener.document.getElementById("idCk").setAttribute("readonly", true);
+	<button type="button" onclick="close_window()">닫기</button>
+	<script>
+	function close_window(){
+		opener.document.gerElementById("id").value = document.getElementById("id").value;
+		opener.document.getElementById("idCk").value = document.getElementById("idCk").value;
+		opener.document.getElementById("msg").value = document.getElementById("msg").value;
+		if (document.getElementById("idck").value == "yes"){
+			opener.document.getElementById("id").setAttribute("readonly", true);
+		}
+		window.close();
 	}
-	window.close();
-}
-</script>
+	</script>
 </body>
 </html>
 <%

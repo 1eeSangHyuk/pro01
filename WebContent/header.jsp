@@ -25,10 +25,11 @@
             <%
             	} else if (uid != null){
             %>	
-            	<li><%=uid %>님, 안녕하세요</li>
+            	<li><%=uid %>님, 안녕하세요!&nbsp;&nbsp;&nbsp;<a href="mypage.jsp">마이페이지</a></li>
             	<li><a href="basket.jsp">장바구니</a></li>
                 <li><a href="orderView.jsp">주문조회</a></li>
                 <li><a href="myShoping.jsp">마이쇼핑</a></li>
+                <li><a href="logout.jsp">로그아웃</a></li>
             <%
             	}
             %>

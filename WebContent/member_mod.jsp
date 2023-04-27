@@ -1,5 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
+<%
+	String driver = "org.postgresql.Driver";
+	String url = "jdbc:postgresql://localhost/pro1";
+	String user = "postgres";
+	String pass = "1234";
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	String mem_id = (String) session.getAttribute("uid");
+	String mem_pw = "";
+	String mem_name = "";
+	String phone = "";
+	String email = "";
+	String addr = "";
+	
+	String sql = "";
+	
+	try{
+		Class.forName(driver);
+		try{
+			conn = DriverManager.getConnection(url, user, pass);
+			sql = "select * from member_tbl where mem_id=?";
+			try{
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mem_id);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					mem_id = rs.getString("mem_id");
+					mem_pw = rs.getString("mem_pw");
+					mem_name = rs.getString("mem_name");
+					phone = rs.getString("phone");
+					email = rs.getString("email");
+					addr = rs.getString("addr");
+				}
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch(Exception e){
+			System.out.println("DB 실행 중 오류");	
+			}
+		} catch(Exception e){
+		System.out.println("DB 연결 오류");
+		}
+	} catch(Exception e){
+	System.out.println("드라이버 연결 오류");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +76,11 @@
         </div>
     </section>
     <section class="page">
-		<form name="join_form" action="submitPro.jsp" method="post" onsubmit="return formCheck()">
+		<form name="join_form" action="member_mod_Pro.jsp" method="post" onsubmit="return formCheck()">
 			<table>
 				<tbody>
 					<tr>
-						<th><label for="id">아이디</label></th>
-						<td>
-							<input type="text" name="id" id="id" required>
-							<input type="hidden" name="idCk" id="idCk" value="no">
-							<input type="button" value="아이디 중복 확인" onclick="idCheck()">
-							<p id="msg"></p>
-						</td>
-						
+						<th><label for="id">아이디 : <%=mem_id %></label></th>
 					</tr>
 					<tr>
 						<th><label for="pw1">비밀번호</label></th>
@@ -51,7 +95,7 @@
 						<td><input type="text" name="name" id="name" required></td>
 					</tr>
 					<tr>
-						<th><label for="tel">전화번호</label></th>
+						<th><label for="phone">전화번호</label></th>
 						<td><input type="text" name="phone" id="phone"></td>
 					</tr>
 					<tr>
@@ -64,7 +108,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="회원가입"> &nbsp; &nbsp; &nbsp; &nbsp;
+							<input type="submit" value="회원정보 수정"> &nbsp; &nbsp; &nbsp; &nbsp;
 							<input type="reset" value="취소">
 						</td>
 					</tr>
@@ -72,16 +116,6 @@
 			</table>
 		</form>
 		<script>
-		function idCheck(){
-			var id = document.getElementById("id");
-			if(id.value != ""){
-				window.open("idCheck.jsp?id="+id.value, "아이디 중복 검사", "width=400, height=300");
-			} else {
-				alert("아이디를 입력해주세요");
-				id.focus();
-				return;
-			}
-		}
 		function formCheck(s){
 			if (s.pw1.value != s.pw2.value){
 				alert("비밀번호가 서로 일치하지 않습니다.");

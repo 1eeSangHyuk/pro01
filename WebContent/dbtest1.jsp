@@ -23,9 +23,11 @@
 		Class.forName(driver);
 		try{
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member_tbl";
+			sql = "select * from member_tbl where mem_id=? and mem_pw=?";
 			try{
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "testid1");
+				pstmt.setString(2, "testpw1");
 				rs = pstmt.executeQuery();
 %>
 
@@ -60,7 +62,7 @@
 		</thead>
 		<tbody>
 <%
-				while(rs.next()){
+				if(rs.next()){
 					mem_id = rs.getString("mem_id");
 					mem_pw = rs.getString("mem_pw");
 					mem_name = rs.getString("mem_name");
