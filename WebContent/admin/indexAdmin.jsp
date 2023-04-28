@@ -36,7 +36,7 @@
         <!-- .sub 안뜨는거 + 한글정렬 -->
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="./headerAdmin.jsp" %>
     <div class="container">
         <div class="content">
             <section class="page" id="page4">
@@ -115,7 +115,7 @@
                 </div>
             </section>
         </div>
-        <%@ include file="footer.jsp" %>
+        <%@ include file="../footer.jsp" %>
 	</div>
 </body>
 </html>

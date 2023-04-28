@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="./header.jsp" %>
 	<div class="content">
 		<section class="page" id="page4">
             <h2 class="page_title">페이지제목0</h2>

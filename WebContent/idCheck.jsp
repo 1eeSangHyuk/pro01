@@ -52,13 +52,13 @@
 <%
 				}
 %>
-	<button type="button" onclick="close_window()">닫기</button>
+	<input type="button" value="닫기" onclick="close_window()">
 	<script>
 	function close_window(){
-		opener.document.gerElementById("id").value = document.getElementById("id").value;
+		opener.document.getElementById("id").value = document.getElementById("id").value;
 		opener.document.getElementById("idCk").value = document.getElementById("idCk").value;
 		opener.document.getElementById("msg").value = document.getElementById("msg").value;
-		if (document.getElementById("idck").value == "yes"){
+		if (document.getElementById("idCk").value == "yes"){
 			opener.document.getElementById("id").setAttribute("readonly", true);
 		}
 		window.close();

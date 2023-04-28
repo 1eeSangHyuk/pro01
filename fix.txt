@@ -1,1 +1,12 @@
-1. 회원가입 아이디 중복 팝업 닫기 자바스크립트 오류?
+to_do
+오류 페이지 처리
+회원가입 (비밀번호 불일치 / 아이디 중복 - 사용 불가) 시 밑에 문구
+comm_update, comm_update_pro 포함한 이름 camel로 통일좀
+community_detail 표 사이즈 설정좀
+index.jsp에서 community(community.jsp) 눌렀을때 #page1이 바로 안나오고 스크롤 해야됨
+community(community.jsp) 에서 title 가운데 정렬 안되어있는 page들 있음
+community(community.jsp) 에서 td 가운데 정렬 안되어있는 page들 있음
+일부 페이지들 경로 설정 안됨
+비로그인 상태에서 community.jsp 에 접근 시 글쓰기 권한 없다는 문구 띄우기
+인코딩 설정 (request.setCharacterEncoding(), response.setContentType()) 처리되야하는데 안된 페이지들 있음
+admin 페이지..

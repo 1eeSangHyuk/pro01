@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%
-	String mem_id = request.getParameter("id");
+	request.setCharacterEncoding("utf-8");
+	response.setContentType("text html; charset=utf-8");
+
+	int board_id = Integer.parseInt(request.getParameter("board_id"));
+	String board_title = request.getParameter("board_title");
+	String board_context = request.getParameter("board_context");
+
 
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
@@ -18,17 +24,19 @@
 		Class.forName(driver);
 		try{
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "delete from member_tbl where mem_id=?";
+			sql = "update board set board_title=?, board_context=? where board_id=?";
 			try{
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, mem_id);
+				pstmt.setString(1, board_title);
+				pstmt.setString(2, board_context);
+				pstmt.setInt(3, board_id);
+
 				int i = pstmt.executeUpdate();
 				
-				if (i > 0){
-					session.invalidate();
-					response.sendRedirect("./index.jsp");
+				if (i >0){
+					response.sendRedirect("./community.jsp");
 				} else {
-					response.sendRedirect("./mypage.jsp");
+					response.sendRedirect("./community_detail.jsp");
 				}
 				pstmt.close();
 				conn.close();

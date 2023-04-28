@@ -25,7 +25,7 @@
         </div>
     </section>
     <section class="page">
-		<form name="join_form" action="submitPro.jsp" method="post" onsubmit="return formCheck()">
+		<form name="join_form" action="submitPro.jsp" method="post" onsubmit="return formCheck(this)">
 			<table>
 				<tbody>
 					<tr>
@@ -88,10 +88,10 @@
 				/* 밑에 문구 띄우기 */
 				return false;
 			}
-/* 			if (s.idCk.value != "no"){
+ 			if (s.idCk.value != "no"){
 				alert("ID 중복체크를 완료해주세요.");
 				s.id.focus();
-			} */
+			} 
 		}
 		</script>
 	</section>

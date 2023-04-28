@@ -16,22 +16,11 @@
                 <img src="<%=path_h %>/img/top_logo.png" alt="Pulsar_logo">
             </a>
             <ul class="left_tnb">
-            <%
-            	if (uid.equals("")){
-            %>
-            	<li><a href="<%=path_h %>/login.jsp">로그인</a></li>
-                <li><a href="<%=path_h %>/agreement.jsp">회원가입</a></li>
-            <%
-            	} else if (uid != null){
-            %>	
-            	<li><%=uid %>님, 안녕하세요!&nbsp;&nbsp;&nbsp;<a href="<%=path_h %>/mypage.jsp">마이페이지</a></li>
+            	<li>관리자님, 안녕하세요!&nbsp;&nbsp;&nbsp;<a href="<%=path_h %>/mypage.jsp">마이페이지</a></li>
             	<li><a href="<%=path_h %>/basket.jsp">장바구니</a></li>
                 <li><a href="<%=path_h %>/orderView.jsp">주문조회</a></li>
                 <li><a href="<%=path_h %>/myShoping.jsp">마이쇼핑</a></li>
                 <li><a href="<%=path_h %>/logout.jsp">로그아웃</a></li>
-            <%
-            	}
-            %>
             </ul>
         </div>
     </nav>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%
-	String mem_id = request.getParameter("id");
+	int board_id = Integer.parseInt(request.getParameter("board_id"));
 
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
@@ -18,17 +18,16 @@
 		Class.forName(driver);
 		try{
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "delete from member_tbl where mem_id=?";
+			sql = "delete from board where board_id=?";
 			try{
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, mem_id);
+				pstmt.setInt(1, board_id);
 				int i = pstmt.executeUpdate();
 				
-				if (i > 0){
-					session.invalidate();
-					response.sendRedirect("./index.jsp");
+				if (i >0){
+					response.sendRedirect("community.jsp");
 				} else {
-					response.sendRedirect("./mypage.jsp");
+					response.sendRedirect("community_detail.jsp");
 				}
 				pstmt.close();
 				conn.close();

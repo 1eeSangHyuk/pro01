@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%
+	String path = request.getContextPath();
+
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
 	String user = "postgres";
@@ -107,8 +109,8 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<a href="member_mod.jsp?id=<%=uid %>" class="btn btn-primary">회원정보 수정하기</a> &nbsp; &nbsp; &nbsp; &nbsp;
-							<a href="member_del.jsp?id=<%=uid %>" class="btn btn-cancle">회원 탈퇴하기</a>
+							<a href="<%=path %>/member_mod.jsp?id=<%=mem_id %>">회원정보 수정하기</a> &nbsp; &nbsp; &nbsp; &nbsp;
+							<a href="<%=path %>/member_del.jsp?id=<%=mem_id %>">회원 탈퇴하기</a>
 						</td>
 					</tr>
 				</tbody>
