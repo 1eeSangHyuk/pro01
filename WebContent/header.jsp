@@ -50,7 +50,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="">COMMUNITY</a>
+                    <li><a href="<%=path_h %>/community/community.jsp">COMMUNITY</a>
                         <div class="sub item2">
                             <ul class="dp2">
                                 <li><a href="<%=path_h %>/community/community.jsp#page1">공지사항</a></li>

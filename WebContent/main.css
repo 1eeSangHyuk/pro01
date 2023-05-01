@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.title {text-align:center;}
+.table, .msg { width:1000px; margin: 0 auto;}
+.btn { padding: 15px 0px 0px 0px; }
+
+.page { clear: both; position: relative; width: 100vw; height: calc(100vh - 200px); background-color: #ffffff; color: #000000; }
+.page_wrap { clear: both; width: 1580px; margin: 0 auto; }
+.page_title { text-align:center; font-size: 25px; padding: 1.5em 0em 0.5em 0em; }
+.page_sub { text-align:center; font-size: 15px; padding: 1em 0em 1.5em 0em;  }
+
+#page1 { clear:both; height: 100vh; }
+#page1 .page_title { display: block; }
+#page1 .page_wrap { clear: both; height: calc(100vh - 300px); margin: 0 auto; text-align: center; padding-top: 250px; padding-bottom: 50px;}
+
+#page2, #page3, #page4 { clear:both;}
+#page2 .page_wrap { clear: both; height: calc(100vh - 300px); text-align: center; padding: 50px 0px 50px 0px; }
+
+#page2 { background-color: #fff; color: #000; }

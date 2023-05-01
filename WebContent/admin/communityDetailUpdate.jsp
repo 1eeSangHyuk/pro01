@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%
-	/* String path_c = request.getContextPath(); */
-	request.setCharacterEncoding("utf-8");
-	response.setContentType("text html; charset=utf-8");
-%>
-<%
 	String path = request.getContextPath();
 
 	String driver = "org.postgresql.Driver";
@@ -67,43 +62,51 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.table, .msg { width:500px; }
-#page3 .page_title { display: inline; }
+	.content { min-height:500px; }
+	.table{ width: 500px; }
 </style>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
-<div class="container">
-    <div class="content">
-        <section class="page" id="page1">
-        	<div class="page_wrap">
-	        	<h2 class="page_title">글 수정하기</h2>
-	        	<form action="communityDetailUpdatePro.jsp" method="post">
-	           		<table class="table">
-						<tbody>
-							<tr>
-								<th><label for="board_title">제목 : </label></th>
-								<td>
-									<input type="hidden" name="board_id" id="board_id" value="<%=board_id %>">
-									<input type="text" name="board_title" id="board_title" value=<%=board_title %> required>
-								</td>
-							</tr>
-							<tr>
-								<th>내용 : </th>
-								<td><textarea rows="20" cols="45" name="board_context" id="board_context"><%=board_context %></textarea></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<input type="submit" value="글 수정하기">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			</div>
-        </section>
-    </div>
+<%@ include file="./headerAdmin.jsp" %>
+<div class="content">
+    <section class="page" id="page1">
+    	<div class="page_wrap">
+    		<h2 class="page_title">글 수정하기</h2>
+        	<form action="<%=path %>/communityDetailUpdatePro.jsp" method="post">
+           		<table class="table">
+					<tbody>
+						<tr>
+							<th><label for="board_title">제목 : </label></th>
+							<td>
+								<input type="hidden" name="board_id" id="board_id" value="<%=board_id %>">
+								<input type="text" name="board_title" id="board_title" value=<%=board_title %> required>
+							</td>
+						</tr>
+						<tr>
+							<th>내용 : </th>
+							<td><textarea rows="20" cols="45" name="board_context" id="board_context"><%=board_context %></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input type="submit" value="글 수정하기">
+								<a href="<%=path %>/admin/community.jsp">공지사항 목록으로 가기</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</section>
+	<script>
+	function formCheck(s){
+		if (s.pw1.value != s.pw2.value){
+			alert("비밀번호가 서로 일치하지 않습니다.");
+			/* 밑에 문구 띄우기 */
+			return false;
+		}
+	}
+	</script>
+	<%@ include file="../footer.jsp" %>
 </div>
-<%@ include file="../footer.jsp" %>
 </body>
 </html>

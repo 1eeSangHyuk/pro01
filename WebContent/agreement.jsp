@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,28 +10,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Poppins:wght@900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="common.css">
+	<link rel="stylesheet" href="<%=path %>/common.css">
+	<link rel="stylesheet" href="<%=path %>/main.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
 	.content { min-height:500px; }
-	#page4 { height: 200px; }
 	.page { height : auto; }
+	#page1 { height: auto; }
+	#page1 .page_wrap { height: auto; }
 </style>
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="./header.jsp" %>
 <div class="content">
-	<section class="page" id="page4">
-        <h2 class="page_title">페이지제목0</h2>
-        <div class="page_wrap">
-            <h2>000a0a</h2>
-        </div>
-    </section>
-    <section class="page">
-		<h2>이용약관 및 개인정보취급방침 동의</h2>
-		<h3>이용약관 동의</h3>
-		<textarea rows="30" cols="100">
+    <section class="page" id="page1">
+    	<div class="page_wrap">
+			<h2 class="page_title">이용약관 및 개인정보취급방침 동의</h2>
+			<h3 class="page_title">이용약관 동의</h3>
+			<textarea rows="30" cols="100">
 		제1조(목적)
 이 약관은 주식회사 에이플러스엑스 회사(전자상거래 사업자)가 운영하는 펄사 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리.의무 및 책임사항을 규정함을 목적으로 합니다.
 ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
@@ -191,13 +191,13 @@
 ② “몰”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.
 
 부 칙(시행일) 이 약관은 년 월 일부터 시행합니다.
-		</textarea>
-		<div>
-			<label for="ag_ck1">이용 약관에 동의</label>
-			<input type="checkbox" name="ag_ck1" id="ag_ck1">
-		</div>
-		<h3>개인정보취급방침 동의</h3>
-		<textarea rows="30" cols="100">
+			</textarea>
+			<div>
+				<label for="ag_ck1">이용 약관에 동의</label>
+				<input type="checkbox" name="ag_ck1" id="ag_ck1">
+			</div>
+			<h3 class="page_title">개인정보취급방침 동의</h3>
+			<textarea rows="30" cols="100">
 		(주)에이플러스엑스는 (이하 "회사"는) 고객님의 개인정보를 중요시하며, "개인정보 보호법" 등 관련 법령을 준수하고 있습니다.
 회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 
@@ -306,15 +306,15 @@ o 기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에
 개인정보분쟁조정위원회 (kopico.go.kr / 1833-6972)
 대검찰청 사이버수사과 (spo.go.kr / 지역번호+1301)
 경찰청 사이버안전국 (cyberbureau.police.go.kr / 국번없이 182)
-		</textarea>
-		<div>
-			<label for="ag_ck2">개인정보취급방침에 동의</label>
-			<input type="checkbox" name="ag_ck2" id="ag_ck2">
-		</div>
-		<div>
-			<input type="button" id="btn_click" value="다음 단계">
-		</div>
-		<script>
+			</textarea>
+			<div>
+				<label for="ag_ck2">개인정보취급방침에 동의</label>
+				<input type="checkbox" name="ag_ck2" id="ag_ck2">
+			</div>
+			<div class="btn">
+				<input type="button" id="btn_click" value="다음 단계">
+			</div>
+			<script>
 		var ag_ck1 = document.getElementById("ag_ck1");
 		var ag_ck2 = document.getElementById("ag_ck2");
 		btn_click.addEventListener("click", function(){
@@ -330,9 +330,10 @@ o 기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에
 				return;
 			}
 		});
-		</script>
+			</script>
+		</div>
 	</section>
-	<%@ include file="footer.jsp" %>
+	<%@ include file="./footer.jsp" %>
 </div>
 </body>
 </html>

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/* 메인 페이지 */
+.page { clear: both; position: relative; width: 100vw; height: 100vh; }
+.page_wrap { clear: both; width: 100vw; margin: 0 auto; }
+.page_title { text-align:center; font-size: 25px; padding-top: 1.5em; }
+.page_sub { text-align:center; font-size: 15px; padding: 1em 0em 1.5em 0em;  }
+
+.vs { clear:both; position:relative; width: 100vw; height:100vh;
+        overflow:hidden; }
+  .vs video { display: block; width: 100vw;}
+
+
+#page1 { clear:both; background-color: #ffffff; color: #000000; height:650px; }
+#page1 .page_title { display: none; }
+#page1 .tit_box { clear:both; padding-top: 80px; }
+#page1 .page_wrap { clear: both; width: 1580px; height: 350px; margin: 0 auto; text-align: center; padding-top: 250px; padding-bottom: 50px;}
+.colm_fr, .lst { clear:both; } 
+.lst li { float:left; width: 350px; height: 350px; box-sizing: border-box; background-position: center; 
+background-repeat: no-repeat; background-size: cover;}
+.lst .it { margin-right: 60px; }
+.lst .it:last-child { margin-right: 0px; } 
+.lst .item1 { background-image: url(./img/menu_mouse.jpg); } 
+.lst .item2 { background-image: url(./img/menu_keyboard.jpg);} 
+.lst .item3 { background-image: url(./img/menu_mouse\ pad.jpg);} 
+.lst .item4 { background-image: url(./img/menu_mouse\ accessories.jpg);} 
+.lst .item_tit { display: block; line-height: 300px; width: 350px; height: 350px; }
+.lst .item_tit:hover { display: block; line-height: 300px; width: 350px; height: 350px; text-align: center; font-size: 30px; background-color: #272727a9;
+transition: 0.1s ease-in;}
+.lst li a h3 { color:#fff; }
+
+#page2 { clear:both; position:relative; width: 100vw; height:150vh; overflow:hidden; background-color: #000; color: #fff; }
+#page2 .page_wrap { padding-top: 0px; }
+.grid_fr { clear:both; width: 100vw; }
+.grid_fr .grid_box { clear:both; width: 100vw; }
+.grid_box li { width: 50vw; float: left; }
+.grid_box li a { display: block; color: #fff; background-position: center; background-repeat: no-repeat;
+background-size:cover; font-size: 30px; box-sizing: border-box; height:50vh; }
+.grid_box li a.item1 { background-image: url(./img/Pulsar\ Gaming\ Gears\ Superglide.jpg);}
+.grid_box li a.item2 { background-image: url();}
+.grid_box li a.item3 { background-image: url(./img/Pulsar\ Gaming\ Gears\ Xlite\ Grip\ tape.jpg);}
+.grid_box li a.item4 { background-image: url(./img/Pulsar\ Gaming\ Gears\ PCMK\ TKL\ Mechanical\ Gaming\ Keyboard.jpg);}
+.grid_box li a.item5 { background-image: url(./img/Pulsar\ Gaming\ Gears\ Pulsar\ Keycap_puller.jpg);}
+.grid_box li a.item6 { background-image: url(./img/Pulsar\ Gaming\ Gears\ paracontrol\ mouse\ pad.jpg);}
+.grid_box li a .grid_tit { display: block; line-height: 50vh; text-align: center; background-color: #ffffff00;}
+.grid_box li a .grid_tit:hover { display: block; line-height: 50vh; text-align: center; background-color: #00000041; transition: 0.3s ease-in;}
+
+#page3 { clear:both; height: calc(100vh - 200px); }
+#page3 .page_wrap { clear: both; width: 1580px; height: calc(100vh - 300px); text-align: center; padding: 50px 0px 50px 0px;}
+
+
+#page4 { clear:both; height: calc(100vh - 200px); }
+#page4 .page_wrap { clear: both; width: 1580px; height: calc(100vh - 300px); text-align: center; padding: 50px 0px 50px 0px;}
+
+#page0 .page_title { display: none; }

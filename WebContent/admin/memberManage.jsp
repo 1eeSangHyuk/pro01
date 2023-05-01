@@ -4,9 +4,6 @@
 <%
 	String path = request.getContextPath();
 
-	request.setCharacterEncoding("utf-8");
-	response.setContentType("text html; charset=utf-8");
-
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
 	String user = "postgres";
@@ -30,20 +27,39 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#page3 .page_title { display: inline; }
+.title {text-align:center;}
+.table, .msg { width:1000px; margin: 0 auto;}
+
+#page1 { height: 100vh; }
+#page1 .page_title { display: block; }
+#page1 .page_wrap { height: calc(100vh - 300px);}
+
+#page2, #page3, #page4 { clear:both; height: calc(100vh - 200px);}
+#page2 .page_wrap { clear: both; width: 1580px; height: calc(100vh - 300px); text-align: center; padding: 50px 0px 50px 0px; }
+
+#page2 { background-color: #fff; color: #000; }
+
 </style>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="./headerAdmin.jsp" %>
 <div class="container">
     <div class="content">
         <section class="page" id="page1">
         	<div class="page_wrap">
-	        	<h2 class="page_title">공지사항</h2>
+        		<h2 class="page_title">회원정보 관리</h2>
+        		<h3 class="page_sub">회원정보 관리페이지 입니다.</h3>
            		<table class="table">
 					<thead>
 						<tr>
-							<th>id</th><th>title</th><th>context</th><th>name</th><th>time</th>
+							<th>연번</th>
+							<th>아이디</th>
+							<th>회원명</th>
+							<th>전화번호</th>
+							<th>이메일</th>
+							<th>주소</th>
+							<th>가입일</th>
+							<th colspan="2">회원정보</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,54 +68,57 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
 
-int board_id = Integer.parseInt(request.getParameter("board_id"));
-String title = "";
-String context = "";
-String name = "";
-String regdate = "";
+int i=0;
 String mem_id = "";
+String mem_name = "";
+String phone = "";
+String email = "";
+String addr = "";
+String regdate = "";
 
 try{
 	Class.forName(driver);
 	try{
 		conn = DriverManager.getConnection(url, user, pass);
-		sql = "select a.board_id as board_id, a.board_title as title, a.board_context as context, a.regdate as regdate, b.mem_name as name, a.mem_id as mem_id ";
-		sql += "from board a inner join member_tbl b ";
-		sql += "on a.mem_id = b.mem_id ";
-		sql += "where a.board_id = ?";
+		sql = "select * from member_tbl order by regdate desc";
+
 		try{
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, board_id);
 			rs = pstmt.executeQuery();
 
-				if(rs.next()){
-					title = rs.getString("title");
-					context = rs.getString("context");
-					name = rs.getString("name");
-					regdate = rs.getString("regdate");
+				while(rs.next()){
+					i++;
 					mem_id = rs.getString("mem_id");
+					mem_name = rs.getString("mem_name");
+					phone = rs.getString("phone");
+					email = rs.getString("email");
+					addr = rs.getString("addr");
+					regdate = rs.getString("regdate");
 %>
-						<tr>
-							<td><%=board_id %></td>
-							<td><%=title %></td>
-							<td><%=context %></td>
-							<td><%=name %></td>
-							<td><%=regdate %></td>
-						</tr>
+					<tr>
+						<td><%=i %></td>
+						<td><%=mem_id %></td>
+						<td><%=mem_name %></td>
+						<td><%=phone %></td>
+						<td><%=email%></td>
+						<td><%=addr %></td>
+						<td><%=regdate %></td>
 <%
- 					if ( uid_c.equals("admin") || uid_c.equals(mem_id) ){ 
+					if (mem_id.equals("admin")){
 %>
-		 				<tr>
-		 					<td colspan="3"></td>
-							<td colspan="1">
-								<a href="./community_detail_update.jsp?board_id=<%=board_id %>">글 수정하기</a>
-							</td>
-							<td colspan="1">
-								<a href="./community_detail_del.jsp?board_id=<%=board_id %>">글 삭제하기</a>
-							</td>
-						</tr>
+						<td colspan="2">
+							<a href="<%=path %>/admin/memberMod.jsp?mem_id=<%=mem_id %>">수정</a>
+						</td>
+<%						
+					} else {
+%>
+						<td>
+							<a href="<%=path %>/admin/memberMod.jsp?mem_id=<%=mem_id %>">수정</a>
+							<a href="<%=path %>/admin/memberDel.jsp?mem_id=<%=mem_id %>">삭제</a>
+						</td>
+					</tr>
 <%
- 					}
+					}
 				}
 				rs.close();
 				pstmt.close();
@@ -114,11 +133,6 @@ try{
 		System.out.println("드라이버 연결 오류");
 	}
 %>		
-						<tr>
-							<td colspan="5">
-								<a href="<%=path %>/community/community.jsp">공지사항 목록으로 가기</a>
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>

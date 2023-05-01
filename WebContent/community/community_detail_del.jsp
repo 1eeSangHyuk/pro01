@@ -25,9 +25,9 @@
 				int i = pstmt.executeUpdate();
 				
 				if (i >0){
-					response.sendRedirect("community.jsp");
+					response.sendRedirect("./community.jsp");
 				} else {
-					response.sendRedirect("community_detail.jsp");
+					response.sendRedirect("./community_detail.jsp");
 				}
 				pstmt.close();
 				conn.close();

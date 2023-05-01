@@ -30,7 +30,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Poppins:wght@900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="<%=path %>/common.css">
+	<link rel="stylesheet" href="<%=path %>/index.css">
     <style>      
     </style>
         <!-- .sub 안뜨는거 + 한글정렬 -->
@@ -39,13 +40,7 @@
 	<%@ include file="./headerAdmin.jsp" %>
     <div class="container">
         <div class="content">
-            <section class="page" id="page4">
-                <h2 class="page_title">페이지제목0</h2>
-                <div class="page_wrap">
-                    <h2>000a0a</h2>
-                </div>
-            </section>
-            <section class="page" id="page2">
+            <section class="page" id="page1">
                 <h2 class="page_title">페이지제목2</h2>
                 <div class="page_wrap">
                     <article class="colm_fr">
@@ -79,12 +74,12 @@
                 <div class="page_wrap">
                     <figure class="vs">
                         <div class="img_box">
-                            <video src="./vid/Pulsar_PCMK_Customizable_keyboard.mp4" muted autoplay loop></video>
+                            <video src="../vid/Pulsar_PCMK_Customizable_keyboard.mp4" muted autoplay loop></video>
                         </div>
                     </figure>
                 </div>
             </section>
-            <section class="page" id="page1">
+            <section class="page" id="page2">
                 <div class="page_wrap">
                     <article class="grid_fr">
                         <ul class="grid_box">

@@ -34,7 +34,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="./headerAdmin.jsp" %>
 <div class="container">
     <div class="content">
         <section class="page" id="page1">
@@ -87,19 +87,17 @@ try{
 							<td><%=regdate %></td>
 						</tr>
 <%
- 					if ( uid_c.equals("admin") || uid_c.equals(mem_id) ){ 
 %>
 		 				<tr>
 		 					<td colspan="3"></td>
 							<td colspan="1">
-								<a href="./community_detail_update.jsp?board_id=<%=board_id %>">글 수정하기</a>
+								<a href="<%=path %>/admin/communityDetailUpdate.jsp?board_id=<%=board_id %>">글 수정하기</a>
 							</td>
 							<td colspan="1">
-								<a href="./community_detail_del.jsp?board_id=<%=board_id %>">글 삭제하기</a>
+								<a href="<%=path %>/admin/communityDetailDel.jsp?board_id=<%=board_id %>">글 삭제하기</a>
 							</td>
 						</tr>
 <%
- 					}
 				}
 				rs.close();
 				pstmt.close();
@@ -116,7 +114,7 @@ try{
 %>		
 						<tr>
 							<td colspan="5">
-								<a href="<%=path %>/community/community.jsp">공지사항 목록으로 가기</a>
+								<a href="<%=path %>/admin/community.jsp">공지사항 목록으로 가기</a>
 							</td>
 						</tr>
 					</tbody>

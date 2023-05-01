@@ -10,3 +10,4 @@ community(community.jsp) 에서 td 가운데 정렬 안되어있는 page들 있�
 비로그인 상태에서 community.jsp 에 접근 시 글쓰기 권한 없다는 문구 띄우기
 인코딩 설정 (request.setCharacterEncoding(), response.setContentType()) 처리되야하는데 안된 페이지들 있음
 admin 페이지..
+community - 글 수정하기

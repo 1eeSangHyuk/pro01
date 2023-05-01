@@ -23,12 +23,12 @@
 </style>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="./headerAdmin.jsp" %>
 <div class="content">
 	<section class="page" id="page1">
 		<div class="page_wrap">
 		    <h2 class="page_title">글 쓰기</h2>
-		    <form action="communityInsertPro.jsp" method="post">
+		    <form action="<%=path %>/admin/communityInsertPro.jsp" method="post">
 		       	<table class="table">
 					<tbody>
 						<tr>

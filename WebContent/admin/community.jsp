@@ -30,7 +30,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
+<%@ include file="./headerAdmin.jsp" %>
 <div class="container">
     <div class="content">
         <section class="page" id="page1">
@@ -40,7 +40,11 @@
            		<table class="table">
 					<thead>
 						<tr>
-							<th>id</th><th>title</th><th>name</th><th>time</th>
+							<th>id</th>
+							<th>title</th>
+							<th>name</th>
+							<th>time</th>
+							<th colspan="2">글 수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -73,35 +77,24 @@ try{
 					context = rs.getString("context");
 					name = rs.getString("name");
 					regdate = rs.getString("regdate");
-					
-					if (uid != ""){
-%>
+%>					
 					<tr>
 						<td><%=board_id %></td>
-						<td><a href="<%=path %>/community/community_detail.jsp?board_id=<%=board_id %>"><%=title %></a></td>
+						<td><a href="<%=path %>/admin/communityDetail.jsp?board_id=<%=board_id %>"><%=title %></a></td>
 						<td><%=name %></td>
 						<td><%=regdate %></td>
+						<td colspan="2">
+							<a href="<%=path %>/admin/communityDetailUpdate.jsp?board_id=<%=board_id %>">수정</a>
+							<a href="<%=path %>/admin/communityDetailDel.jsp?board_id=<%=board_id %>">삭제</a>
+						</td>
 					</tr>
-<%
-					} else {
-%>
-					<tr>
-						<td><%=board_id %></td>
-						<td><%=title %></td>
-						<td><%=name %></td>
-						<td><%=regdate %></td>
-					</tr>
-<%
-
-					}
+<%					
 				}
-				if (uid != ""){
 %>
 				<tr>
-					<td><a href="<%=path %>/community/communityInsert.jsp">글 쓰기</a></td>
+					<td><a href="<%=path %>/admin/communityInsert.jsp">글 쓰기</a></td>
 				</tr>
 <%
-				}
 				rs.close();
 				pstmt.close();
 				conn.close();
