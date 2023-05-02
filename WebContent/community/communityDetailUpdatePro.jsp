@@ -34,7 +34,7 @@
 				int i = pstmt.executeUpdate();
 				
 				if (i >0){
-					response.sendRedirect("./community.jsp");
+					response.sendRedirect("./community.jsp#page1");
 				} else {
 					response.sendRedirect("./community_detail.jsp");
 				}

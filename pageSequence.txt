@@ -1,0 +1,37 @@
+-메인화면(index.jsp + header.jsp + footer.jsp) -> 커뮤니티(./community/community.jsp)
+
+1. 비로그인 상태
+1-1. 회원가입
+회원가입(메인화면) -> 약관페이지(agreement.jsp) -> 회원가입 폼(submit.jsp) -> 아이디 중복처리(idCheck.jsp) -> 회원가입처리(submitPro.jsp) -> 메인화면
+1-2. 로그인
+로그인(메인화면) -> 로그인 폼(login.jsp) -> 로그인 처리(loginPro.jsp) -> 메인화면
+
+2. 일반회원 로그인 상태
+2-1. 마이페이지
+메인화면 -> 마이페이지 -> 마이페이지 폼(mypage.jsp)
+2-1. 회원정보수정하기
+마이페이지 -> 회원정보 수정 폼(member_mod.jsp) -> 회원정보 수정 처리(member_mod_Pro.jsp) -> 마이페이지 폼(mypage.jsp)
+2-2. 회원 탈퇴하기
+마이페이지(메인화면) -> 마이페이지 폼(mypage.jsp) -> 회원 탈퇴하기 처리(member_del.jsp) -> 메인화면
+2-3. 로그아웃
+메인화면 -> 로그아웃 처리(logout.jsp) -> 메인화면
+2-4. 공지사항
+메인화면 -> community - 공지사항(./community/community.jsp#page1)
+2-4-1. 공지사항 자세히 보기
+메인화면 -> 커뮤니티(./community/community.jsp#page1) -> 자세히 보고 싶은 글의 title 항목 클릭 -> 공지사항 자세히 보기 폼(./community/community_detail.jsp)
+2-4-1-1. 공지사항 글 수정하기(공지사항을 작성한 계정에 한정)
+공지사항 자세히 보기 -> 글 수정하기 폼(./community/community_detail_update.jsp) -> 글 수정하기 처리(./community/communityDetailUpdatePro.jsp) -> 공지사항
+2-4-1-2. 공지사항 글 삭제하기(공지사항을 작성한 계정에 한정)
+공지사항 자세히 보기 -> 글 삭제하기처리(./community/community_detail_del.jsp) -> 공지사항
+2-4-2. 공지사항 글 쓰기
+공지사항 -> id란 밑 글 쓰기 클릭 -> 공지사항 글 쓰기 폼((./community/communityInsert.jsp) -> 공지사항 글 쓰기 처리(./community/communityInsertPro.jsp) -> 공지사항
+2-5. 리뷰
+메인화면 -> community - Review(./community/community.jsp#page2)
+2-5-1. 리뷰 자세히 보기
+메인화면 -> community - Review(./community/community.jsp#page2) -> 자세히 보고싶은 리뷰의 subject 항목 클릭 -> 리뷰 자세히 보기 폼(./community/reviewDetail.jsp)
+2-5-1-1. 리뷰 글 수정하기(리뷰 작성한 계정에 한정)
+리뷰 자세히 보기 -> 리뷰 수정하기 폼(./community/reviewDetailUpdate.jsp) -> 리뷰 수정하기 처리(./community/reviewDetailUpdatePro.jsp) -> 리뷰
+2-5-1-2. 리뷰 글 삭제하기(리뷰 작성한 계정에 한정)
+리뷰 자세히 보기 -> 리뷰 삭제하기 처리(./community/reviewDetailDel.jsp) -> 리뷰
+2-5-2.  리뷰 글 쓰기
+리뷰 -> 연변란 밑 리뷰 작성하기 클릭 -> 리뷰 작성하기 폼(./community/reviewInsert.jsp) -> 리뷰 작성하기 처리(./community/reviewInsertPro.jsp) -> 리뷰

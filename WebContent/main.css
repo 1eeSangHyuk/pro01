@@ -9,7 +9,7 @@
 .page_title { text-align:center; font-size: 25px; padding: 1.5em 0em 0.5em 0em; }
 .page_sub { text-align:center; font-size: 15px; padding: 1em 0em 1.5em 0em;  }
 
-#page1 { clear:both; height: 100vh; }
+#page1 { clear:both; height: 100vh; background-color: #fff; color: #000;}
 #page1 .page_title { display: block; }
 #page1 .page_wrap { clear: both; height: calc(100vh - 300px); margin: 0 auto; text-align: center; padding-top: 250px; padding-bottom: 50px;}
 

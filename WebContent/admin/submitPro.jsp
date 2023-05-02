@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%
-	request.setCharacterEncoding("utf-8");
-	response.setContentType("text html; charset=utf-8");
-
-	String board_title = request.getParameter("board_title");
-	String board_context = request.getParameter("board_context");
-	String mem_id = (String) session.getAttribute("uid");
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw1");
+	String name = request.getParameter("name");
+	String phone = request.getParameter("phone");
+	String email = request.getParameter("email");
+	String addr = request.getParameter("addr");
 
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
@@ -23,20 +23,22 @@
 		Class.forName(driver);
 		try{
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "Insert into board values(default,?,?,?,default)";
+			sql = "insert into member_tbl values(?, ?, ?, ?, ?, ?, default)";
 			try{
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, board_title);
-				pstmt.setString(2, board_context);
-				pstmt.setString(3, mem_id);
-
+ 				pstmt.setString(1, id);
+				pstmt.setString(2, pw);
+				pstmt.setString(3, name);
+				pstmt.setString(4, phone);
+				pstmt.setString(5, email);
+				pstmt.setString(6, addr);
 				int i = pstmt.executeUpdate();
-				
-				if (i >0){
-					response.sendRedirect("./community.jsp#page1");
-				} else {
-					response.sendRedirect("./community_detail.jsp");
+				if (i>0){
+					response.sendRedirect("./memberManage.jsp");
+				} else{
+					response.sendRedirect("./indexAdmin.jsp");
 				}
+				
 				pstmt.close();
 				conn.close();
 			} catch(Exception e){

@@ -27,6 +27,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.table { border: 1px solid #000; }
 </style>
 </head>
 <body>
@@ -124,6 +125,76 @@ try{
         	<div class="page_wrap">
         		<h2 class="page_title">Review</h2>
         		<h3 class="page_sub">Pulsar 제품의 리뷰를 확인해보세요.</h3>
+        		           		<table class="table">
+					<thead>
+						<tr>
+							<th>연번</th><th>제품</th><th>subject</th><th>writer</th><th>date</th>
+						</tr>
+					</thead>
+					<tbody>
+<%
+conn = null;
+pstmt = null;
+rs = null;
+
+String review_no = "";
+String prod_name = "";
+String review_title = "";
+String writer = "";
+String resdate = "";
+int i = 0;
+
+try{
+	Class.forName(driver);
+	try{
+		conn = DriverManager.getConnection(url, user, pass);
+		sql = "select a.review_no as review_no, c.prod_name as prod_name, a.review_title as review_title, b.mem_id as mem_id, a.resdate as resdate ";
+		sql += "from review a, member_tbl b, product c ";
+		sql += "where a.prod_no = c.prod_no and a.writer = b.mem_id ";
+		sql += "order by a.review_no desc";
+		try{
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+				while(rs.next()){
+					i++;
+					review_no = rs.getString("review_no");
+					prod_name = rs.getString("prod_name");
+					review_title = rs.getString("review_title");
+					writer = rs.getString("mem_id");
+					resdate = rs.getString("resdate");
+%>
+					<tr>
+						<td><%=i %></td>
+						<td><%=prod_name %></td>
+						<td><a href="<%=path %>/community/reviewDetail.jsp?review_no=<%=review_no %>"><%=review_title %></a></td>
+						<td><%=writer %></td>
+						<td><%=resdate %></td>
+					</tr>
+<%
+				}
+				if (uid != ""){
+%>
+					<tr>
+						<td><a href="<%=path %>/community/reviewInsert.jsp">리뷰 작성하기</a></td>
+					</tr>
+<%
+				}
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch(Exception e){
+				System.out.println("DB 실행 중 오류");	
+			}
+		} catch(Exception e){
+			System.out.println("DB 연결 오류");
+		}
+	} catch(Exception e){
+		System.out.println("드라이버 연결 오류");
+	}
+%>		
+					</tbody>
+				</table>
         	</div>
         </section>
         <hr>

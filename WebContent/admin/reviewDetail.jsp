@@ -4,6 +4,9 @@
 <%
 	String path = request.getContextPath();
 
+	request.setCharacterEncoding("utf-8");
+	response.setContentType("text html; charset=utf-8");
+
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro1";
 	String user = "postgres";
@@ -27,18 +30,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.title {text-align:center;}
-.table, .msg { width:1000px; margin: 0 auto;}
-
-#page1 { height: 100vh; }
-#page1 .page_title { display: block; }
-#page1 .page_wrap { height: calc(100vh - 300px);}
-
-#page2, #page3, #page4 { clear:both; height: calc(100vh - 200px);}
-#page2 .page_wrap { clear: both; width: 1580px; height: calc(100vh - 300px); text-align: center; padding: 50px 0px 50px 0px; }
-
-#page2 { background-color: #fff; color: #000; }
-
+#page3 .page_title { display: inline; }
 </style>
 </head>
 <body>
@@ -47,19 +39,17 @@
     <div class="content">
         <section class="page" id="page1">
         	<div class="page_wrap">
-        		<h2 class="page_title">회원정보 관리</h2>
-        		<h3 class="page_sub">회원정보 관리페이지 입니다.</h3>
-           		<table class="table">
+        		<h2 class="page_title">Review</h2>
+        		<h3 class="page_sub">Pulsar 제품의 리뷰를 확인해보세요.</h3>
+        		           		<table class="table">
 					<thead>
 						<tr>
 							<th>연번</th>
-							<th>아이디</th>
-							<th>회원명</th>
-							<th>전화번호</th>
-							<th>이메일</th>
-							<th>주소</th>
-							<th>가입일</th>
-							<th colspan="2">회원정보</th>
+							<th>제품</th>
+							<th>subject</th>
+							<th>context</th>
+							<th>writer</th>
+							<th>date</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -68,57 +58,62 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
 
-int i=0;
-String mem_id = "";
-String mem_name = "";
-String phone = "";
-String email = "";
-String addr = "";
-String regdate = "";
+String review_no = request.getParameter("review_no");
+String prod_name = "";
+String review_title = "";
+String review_context = "";
+String writer = "";
+String resdate = "";
+int i = 0;
 
 try{
 	Class.forName(driver);
 	try{
 		conn = DriverManager.getConnection(url, user, pass);
-		sql = "select * from member_tbl order by regdate desc";
-
+		sql = "select a.review_no as review_no, c.prod_name as prod_name, a.review_title as review_title, a.review_context as review_context, b.mem_id as mem_id, a.resdate as resdate ";
+		sql += "from review a, member_tbl b, product c ";
+		sql += "where a.prod_no = c.prod_no and a.writer = b.mem_id and a.review_no = ?";
+		sql += "order by a.review_no desc";
 		try{
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, review_no);
 			rs = pstmt.executeQuery();
 
-				while(rs.next()){
+				if(rs.next()){
 					i++;
-					mem_id = rs.getString("mem_id");
-					mem_name = rs.getString("mem_name");
-					phone = rs.getString("phone");
-					email = rs.getString("email");
-					addr = rs.getString("addr");
-					regdate = rs.getString("regdate");
+					prod_name = rs.getString("prod_name");
+					review_title = rs.getString("review_title");
+					review_context = rs.getString("review_context");
+					writer = rs.getString("mem_id");
+					resdate = rs.getString("resdate");
 %>
-						<tr>
-							<td><%=i %></td>
-							<td><%=mem_id %></td>
-							<td><%=mem_name %></td>
-							<td><%=phone %></td>
-							<td><%=email%></td>
-							<td><%=addr %></td>
-							<td><%=regdate %></td>
+					<tr>
+						<td><%=i %></td>
+						<td><%=prod_name %></td>
+						<td><a><%=review_title %></a></td>
+						<td><a><%=review_context %></a></td>
+						<td><%=writer %></td>
+						<td><%=resdate %></td>
+					</tr>
 <%
-					if (mem_id.equals("admin")){
+ 					if ( uid_c.equals("admin") || uid_c.equals(writer) ){ 
 %>
-							<td colspan="2">
-								<a href="<%=path %>/admin/memberMod.jsp?mem_id=<%=mem_id %>">수정</a>
+		 				<tr>
+		 					<td colspan="4"></td>
+							<td colspan="1">
+								<a href="<%=path %>/admin/reviewDetailUpdate.jsp?review_no=<%=review_no %>">후기 수정하기</a>
 							</td>
-<%						
-					} else {
-%>
-							<td>
-								<a href="<%=path %>/admin/memberMod.jsp?mem_id=<%=mem_id %>">수정</a>
-								<a href="<%=path %>/admin/memberDel.jsp?mem_id=<%=mem_id %>">삭제</a>
+							<td colspan="1">
+								<a href="<%=path %>/admin/reviewDetailDel.jsp?review_no=<%=review_no %>">후기 삭제하기</a>
 							</td>
 						</tr>
 <%
-					}
+ 					}
+%>
+						<tr>
+							<td colspan="6"><a href="<%=path %>/admin/community.jsp#page2">뒤로가기</a></td>
+						</tr>
+<%
 				}
 				rs.close();
 				pstmt.close();
@@ -133,14 +128,9 @@ try{
 		System.out.println("드라이버 연결 오류");
 	}
 %>		
-						<tr>
-							<td>
-								<a href="<%=path %>/admin/submit.jsp">회원 생성하기</a>
-							</td>
-						</tr>
 					</tbody>
 				</table>
-			</div>
+        	</div>
         </section>
     </div>
 </div>
